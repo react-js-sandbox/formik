@@ -9,7 +9,7 @@ const validationSchema = Yup.object({
 });
 
 
-const YoutubeForm = () => {
+const OldYoutubeForm = () => {
     const formik = useFormik({
         initialValues: {
             name: '',
@@ -20,6 +20,21 @@ const YoutubeForm = () => {
             console.log('Submitted form', values)
         },
         validationSchema
+        // validate: values => {
+        //     let errors = {};
+        //     if (!values.name) {
+        //         errors.name = 'Required';
+        //     }
+        //     if (!values.email) {
+        //         errors.email = 'Required';
+        //     } else if (!validateEmail(values.email)) {
+        //         errors.email = 'Is not correct';
+        //     }
+        //     if (!values.channel) {
+        //         errors.channel = 'Required';
+        //     }
+        //     return errors;
+        // }
     });
     // console.log(formik.values);
     console.log('visited fields', formik.touched);
@@ -28,21 +43,18 @@ const YoutubeForm = () => {
         <div>
             <form onSubmit={formik.handleSubmit}>
                 <label htmlFor="name">Name</label>
-                <input type="text" id='name' name='name'
-                       {...formik.getFieldProps('name')}
-                />
+                <input type="text" id='name' name='name' onChange={formik.handleChange} onBlur={formik.handleBlur}
+                       value={formik.values.name}/>
                 {formik.touched.name && formik.errors.name ? formik.errors.name: ''}
 
                 <label htmlFor="email">Email</label>
-                <input type="text" id='email' name='email'
-                    {...formik.getFieldProps('email')}
-                />
+                <input type="text" id='email' name='email' onChange={formik.handleChange} onBlur={formik.handleBlur}
+                       value={formik.values.email}/>
                 {formik.touched.email && formik.errors.email ? formik.errors.email: ''}
 
                 <label htmlFor="channel">Channel</label>
-                <input type="text" id='channel' name='channel'
-                       {...formik.getFieldProps('channel')}
-                />
+                <input type="text" id='channel' name='channel' onChange={formik.handleChange} onBlur={formik.handleBlur}
+                       value={formik.values.channel}/>
                 {formik.touched.channel && formik.errors.channel ? formik.errors.channel: ''}
 
                 <button type='Submit'>Submit</button>
