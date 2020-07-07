@@ -25,6 +25,14 @@ const onSubmit = values => {
     console.log('Submitted form', values)
 };
 
+const validateComments = value => {
+    let error;
+    if (!value) {
+        error = "Required !!!";
+    }
+    return error;
+};
+
 const YoutubeForm = () => {
 
     return (
@@ -49,7 +57,8 @@ const YoutubeForm = () => {
                 <ErrorMessage name='channel'/>
 
                 <label htmlFor="comments">Comments</label>
-                <Field as='textarea' type="text" id='comments' name='comments'/>
+                <Field as='textarea' type="text" id='comments' name='comments' validate={validateComments}/>
+                <ErrorMessage name='comments' component={TextError}/>
 
                 <label htmlFor="address">Address</label>
                 <FastField id='address' name='address'>
