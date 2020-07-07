@@ -10,6 +10,21 @@ const YoutubeForm = () => {
         },
         onSubmit: values => {
             console.log('Submitted form', values)
+        },
+        validate: values => {
+            let errors = {};
+            if (!values.name) {
+                errors.name = 'Required';
+            }
+            if (!values.email) {
+                errors.email = 'Required';
+            } else if (!validateEmail(values.email)) {
+                errors.email = 'Is not correct';
+            }
+            if (!values.channel) {
+                errors.channel = 'Required';
+            }
+            return errors;
         }
     });
     console.log(formik.values);
@@ -18,18 +33,26 @@ const YoutubeForm = () => {
             <form onSubmit={formik.handleSubmit}>
                 <label htmlFor="name">Name</label>
                 <input type="text" id='name' name='name' onChange={formik.handleChange} value={formik.values.name}/>
+                {formik.errors.name}
 
                 <label htmlFor="email">Email</label>
                 <input type="text" id='email' name='email' onChange={formik.handleChange} value={formik.values.email}/>
+                {formik.errors.email}
 
                 <label htmlFor="channel">Channel</label>
                 <input type="text" id='channel' name='channel' onChange={formik.handleChange}
                        value={formik.values.channel}/>
+                {formik.errors.channel}
 
                 <button type='Submit'>Submit</button>
             </form>
         </div>
     );
 };
+
+function validateEmail(email) {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
 
 export default YoutubeForm;
