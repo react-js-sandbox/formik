@@ -36,17 +36,17 @@ const YoutubeForm = () => {
                 <label htmlFor="name">Name</label>
                 <input type="text" id='name' name='name' onChange={formik.handleChange} onBlur={formik.handleBlur}
                        value={formik.values.name}/>
-                {formik.errors.name}
+                {formik.touched.name && formik.errors.name ? formik.errors.name: ''}
 
                 <label htmlFor="email">Email</label>
                 <input type="text" id='email' name='email' onChange={formik.handleChange} onBlur={formik.handleBlur}
                        value={formik.values.email}/>
-                {formik.errors.email}
+                {formik.touched.email && formik.errors.email ? formik.errors.email: ''}
 
                 <label htmlFor="channel">Channel</label>
                 <input type="text" id='channel' name='channel' onChange={formik.handleChange} onBlur={formik.handleBlur}
                        value={formik.values.channel}/>
-                {formik.errors.channel}
+                {formik.touched.channel && formik.errors.channel ? formik.errors.channel: ''}
 
                 <button type='Submit'>Submit</button>
             </form>
