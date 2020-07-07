@@ -1,5 +1,5 @@
 import React from 'react';
-import {Formik, Form, Field, ErrorMessage, FieldArray} from "formik";
+import {Formik, Form, Field, ErrorMessage, FieldArray, FastField} from "formik";
 import * as Yup from 'yup';
 import TextError from "./TextError";
 
@@ -50,15 +50,16 @@ const YoutubeForm = () => {
                 <Field as='textarea' type="text" id='comments' name='comments'/>
 
                 <label htmlFor="address">Address</label>
-                <Field id='address' name='address'>
+                <FastField id='address' name='address'>
                     {(props) => {
+                        console.log("Field render")
                         console.log('props', props)
                         const {field, form, meta} = props;
                         return <div><input type='text' id='address' {...field}/>
                             {meta.touched && meta.error ? <div>meta.error</div> : null}
                         </div>
                     }}
-                </Field>
+                </FastField>
 
                 <label htmlFor="facebook">Facebook</label>
                 <Field type="text" id='facebook' name='social.facebook'/>
@@ -76,7 +77,7 @@ const YoutubeForm = () => {
                 <FieldArray name='phNumbers'>
                     {
                         (fieldArrayProps) => {
-                            console.log('fieldArrayProps', fieldArrayProps);
+                            // console.log('fieldArrayProps', fieldArrayProps);
                             const {push, remove, form} = fieldArrayProps;
                             const {values} = form;
                             const {phNumbers} = values;
@@ -85,7 +86,8 @@ const YoutubeForm = () => {
                                     phNumbers.map((phNumber, index) => (
                                         <div key={index}>
                                             <Field name={`phNumbers[${index}]`}/>
-                                            {index > 0 && <button type='button' onClick={() => remove(index)}>-</button>}
+                                            {index > 0 &&
+                                            <button type='button' onClick={() => remove(index)}>-</button>}
                                             <button type='button' onClick={() => push('')}>+</button>
                                         </div>
                                     ))
