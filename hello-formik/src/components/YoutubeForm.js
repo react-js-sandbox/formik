@@ -13,7 +13,11 @@ const initialValues = {
     email: '',
     channel: '',
     comments: '',
-    address: ''
+    address: '',
+    social: {
+        facebook: '',
+        twitter: ''
+    }
 };
 const onSubmit = values => {
     console.log('Submitted form', values)
@@ -54,6 +58,11 @@ const YoutubeForm = () => {
                     }}
                 </Field>
 
+                <label htmlFor="facebook">Facebook</label>
+                <Field type="text" id='facebook' name='social.facebook'/>
+
+                <label htmlFor="twitter">Twitter</label>
+                <Field type="text" id='twitter' name='social.twitter'/>
 
                 <button type='Submit'>Submit</button>
             </Form>
