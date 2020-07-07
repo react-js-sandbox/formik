@@ -27,7 +27,9 @@ const YoutubeForm = () => {
             return errors;
         }
     });
-    console.log(formik.values);
+    // console.log(formik.values);
+    console.log('visited fields', formik.touched);
+
     return (
         <div>
             <form onSubmit={formik.handleSubmit}>
