@@ -1,5 +1,13 @@
 import React from 'react';
 import {useFormik} from "formik";
+import * as Yup from 'yup';
+
+const validationSchema = Yup.object({
+    name: Yup.string().required('Required'),
+    email: Yup.string().email("Invalid email").required('Required'),
+    channel: Yup.string().required('Required')
+});
+
 
 const YoutubeForm = () => {
     const formik = useFormik({
@@ -11,21 +19,22 @@ const YoutubeForm = () => {
         onSubmit: values => {
             console.log('Submitted form', values)
         },
-        validate: values => {
-            let errors = {};
-            if (!values.name) {
-                errors.name = 'Required';
-            }
-            if (!values.email) {
-                errors.email = 'Required';
-            } else if (!validateEmail(values.email)) {
-                errors.email = 'Is not correct';
-            }
-            if (!values.channel) {
-                errors.channel = 'Required';
-            }
-            return errors;
-        }
+        validationSchema
+        // validate: values => {
+        //     let errors = {};
+        //     if (!values.name) {
+        //         errors.name = 'Required';
+        //     }
+        //     if (!values.email) {
+        //         errors.email = 'Required';
+        //     } else if (!validateEmail(values.email)) {
+        //         errors.email = 'Is not correct';
+        //     }
+        //     if (!values.channel) {
+        //         errors.channel = 'Required';
+        //     }
+        //     return errors;
+        // }
     });
     // console.log(formik.values);
     console.log('visited fields', formik.touched);
