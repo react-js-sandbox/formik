@@ -85,7 +85,7 @@ const YoutubeForm = () => {
                                     phNumbers.map((phNumber, index) => (
                                         <div key={index}>
                                             <Field name={`phNumbers[${index}]`}/>
-                                            <button type='button' onClick={() => remove(index)}>-</button>
+                                            {index > 0 && <button type='button' onClick={() => remove(index)}>-</button>}
                                             <button type='button' onClick={() => push('')}>+</button>
                                         </div>
                                     ))
