@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Formik, Form, Field, ErrorMessage, FieldArray, FastField} from "formik";
 import * as Yup from 'yup';
 import TextError from "./TextError";
@@ -9,7 +9,7 @@ const validationSchema = Yup.object({
     channel: Yup.string().required('Required')
 });
 const initialValues = {
-    name: 'User',
+    name: '',
     email: '',
     channel: '',
     comments: '',
@@ -21,21 +21,6 @@ const initialValues = {
     phoneNumbers: ['', ''],
     phNumbers: ['']
 };
-
-const savedValues = {
-    name: 'Laura',
-    email: 'laura_palmer@peaks.com',
-    channel: 'youtube',
-    comments: 'Hi there',
-    address: 'twin peaks',
-    social: {
-        facebook: '',
-        twitter: ''
-    },
-    phoneNumbers: ['', ''],
-    phNumbers: ['']
-};
-
 const onSubmit = (values, onSubmitProps) => {
     console.log('Submitted form', values);
     console.log('onSubmitProps', onSubmitProps);
@@ -50,13 +35,11 @@ const validateComments = value => {
     return error;
 };
 
-const YoutubeForm = () => {
-    const [formValues, setFormValues] = useState(null);
+const YoutubeFormBeforeLoad = () => {
 
     return (
-        <Formik initialValues={formValues || initialValues} validationSchema={validationSchema} onSubmit={onSubmit}
-                enableReinitialize
-            // validateOnMount={true}
+        <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}
+                // validateOnMount={true}
             // validateOnChange={false}
         >
             {
@@ -133,21 +116,20 @@ const YoutubeForm = () => {
                                 }
                             </FieldArray>
 
-                            {/*<button type='button' onClick={() => formik.validateField('comments')}>Validate comments*/}
-                            {/*</button>*/}
-                            {/*<button type='button' onClick={() => formik.validateForm()}>Validate all</button>*/}
+                            <button type='button' onClick={() => formik.validateField('comments')}>Validate comments
+                            </button>
+                            <button type='button' onClick={() => formik.validateForm()}>Validate all</button>
 
-                            {/*<button type='button' onClick={() => formik.setFieldTouched('comments')}>Visit comments*/}
-                            {/*</button>*/}
-                            {/*<button type='button' onClick={() => formik.setTouched({*/}
-                            {/*    name: true,*/}
-                            {/*    email: true,*/}
-                            {/*    channel: true,*/}
-                            {/*    comments: true*/}
-                            {/*})}>Visit fields*/}
-                            {/*</button>*/}
+                            <button type='button' onClick={() => formik.setFieldTouched('comments')}>Visit comments
+                            </button>
+                            <button type='button' onClick={() => formik.setTouched({
+                                name: true,
+                                email: true,
+                                channel: true,
+                                comments: true
+                            })}>Visit fields
+                            </button>
 
-                            <button type='button' onClick={() => setFormValues(savedValues)}>Load saved data</button>
                             <button type='Submit' disabled={!formik.isValid || formik.isSubmitting}>Submit</button>
                         </Form>
 
