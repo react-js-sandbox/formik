@@ -21,8 +21,10 @@ const initialValues = {
     phoneNumbers: ['', ''],
     phNumbers: ['']
 };
-const onSubmit = values => {
-    console.log('Submitted form', values)
+const onSubmit = (values, onSubmitProps) => {
+    console.log('Submitted form', values);
+    console.log('onSubmitProps', onSubmitProps);
+    onSubmitProps.setSubmitting(false);
 };
 
 const validateComments = value => {
@@ -128,7 +130,7 @@ const YoutubeForm = () => {
                             })}>Visit fields
                             </button>
 
-                            <button type='Submit' disabled={!(formik.dirty && formik.isValid)}>Submit</button>
+                            <button type='Submit' disabled={!formik.isValid || formik.isSubmitting}>Submit</button>
                         </Form>
 
                     )
