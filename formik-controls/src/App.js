@@ -1,11 +1,12 @@
 import React from 'react';
 import './App.css';
+import FormikContainer from "./components/FormikContainer";
 
 function App() {
     return (
-        <>
-            Hi
-        </>
+        <div className='App'>
+            <FormikContainer/>
+        </div>
     );
 }
 
